@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="/css/main.css" rel="stylesheet">
+    <title>메모장</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>id</th>
+        <th>contents</th>
+    </tr>
+    <tr th:each="memo : ${memos}" th:onclick="|window.location='/memo/${memo.idx}'|">
+        <td th:text="${memo.idx}"></td>
+        <td th:text="${memo.contents}"></td>
+    </tr>
+</table>
+
+<div class="center">
+    <button onclick="window.location='/memo/form'">등록</button>
+</div>
+</body>
+</html>
