@@ -5,7 +5,7 @@
     <title>메모장</title>
 </head>
 <body>
-    <form id="update" method="post" th:action="|/memo/${memo.idx}|" th:object="${memo}" action="#">
+    <form id="update" method="post" th:action="|/memos/${memo.idx}|" th:object="${memo}" action="#">
         <input type="hidden" name="_method" value="put">
         <input type="hidden" th:field="*{idx}" name="idx" th:value="${memo.idx}">
         <table>
@@ -28,7 +28,7 @@
         <button onclick="goUpdate()">수정</button>
         <button onclick="goDelete()">삭제</button>
     </div>
-    <form id="delete" method="post" th:action="|/memo/${memo.idx}|" action="#">
+    <form id="delete" method="post" th:action="|/memos/${memo.idx}|" action="#">
         <input type="hidden" name="_method" value="delete">
     </form>
 </body>

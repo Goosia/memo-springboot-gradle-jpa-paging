@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default_layout}">
+
+<!-- add.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+    <link href="/css/main.css" rel="stylesheet">
+</th:block>
+<!-- add.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+    <script type="text/javascript">
+        function addForm() {
+            document.getElementById("add").submit();
+        }
+    </script>
+</th:block>
+
+<!-- Content -->
+<div layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form id="add" method="post" th:action="@{/memos}">
+                    <table>
+                        <tr>
+                            <th>번호</th>
+                            <th>자동생성</th>
+                        </tr>
+                        <tr>
+                            <td class="huge-height">내용</td>
+                            <td>
+                                <div class="container">
+                                    <textarea name="contents" class="text-area" placeholder="메모를 입력하세요."></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <div class="center">
+                    <button onclick="window.location='/'">목록</button>
+                    <button onclick="addForm()">등록</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

@@ -18,7 +18,7 @@
     </table>
     <div class="center">
         <button onclick="window.location='/'">목록</button>
-        <button th:onclick="|window.location='/memo/${memo.idx}/form'|">수정</button>
+        <button th:onclick="|window.location='/memos/${memo.idx}/form'|">수정</button>
         <button onclick="goDelete()">삭제</button>
     </div>
 </body>
@@ -26,7 +26,7 @@
     /*<![CDATA[*/
     const form = document.createElement('form');
     form.setAttribute('method', 'post');
-    form.setAttribute('action', '/memo/[[${memo.idx}]]');
+    form.setAttribute('action', '/memos/[[${memo.idx}]]');
     form.setAttribute('id', 'form');
     document.characterSet = 'utf-8';
 

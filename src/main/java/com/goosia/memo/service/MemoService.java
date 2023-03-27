@@ -8,6 +8,8 @@ import com.goosia.memo.model.MemoVO;
 import com.goosia.memo.repository.MemoRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,6 +42,14 @@ public class MemoService {
     public MemoDTO getById(Integer id) {
         Memo original = requireOne(id);
         return toDTO(original);
+    }
+
+    public Page<MemoDTO> findAll(MemoQueryVO vo, Pageable pageable) {
+        return memoRepository.findAll(pageable).map(this::toDTO);
+    }
+
+    public Page<MemoDTO> findAll(Pageable pageable) {
+        return memoRepository.findAll(pageable).map(this::toDTO);
     }
 
     public List<MemoDTO> query(MemoQueryVO vo) {

@@ -6,15 +6,24 @@ import com.goosia.memo.model.MemoVO;
 import com.goosia.memo.service.MemoService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 메모 컨트롤러
+ * @author goosia
+ * @since 2023-03-24
+ * @version 1.0
+ */
+@Slf4j
 @Validated
 @Controller
-@RequestMapping("/memo")
+@RequestMapping("/memos")
 public class MemoController {
 
     @Autowired
@@ -22,12 +31,12 @@ public class MemoController {
 
     @GetMapping("/form")
     public String addForm() {
-        return "insert";
+        return "pages/memos/add";
     }
 
     @PostMapping
     public String add(@Valid @ModelAttribute MemoVO vo) {
-        memoService.save(vo).toString();
+        memoService.save(vo);
         return "redirect:/";
     }
 
@@ -40,12 +49,12 @@ public class MemoController {
     @GetMapping("/{id}/form")
     public String updateForm(@Valid @NotNull @PathVariable("id") Integer id, Model model) {
         model.addAttribute("memo", memoService.getById(id));
-        return "update";
+        return "pages/memos/update";
     }
 
     @PutMapping("/{id}")
     public String update(@Valid @NotNull @PathVariable("id") Integer id,
-                       @Valid @ModelAttribute MemoUpdateVO vo) {
+                         @Valid @ModelAttribute MemoUpdateVO vo) {
         memoService.update(id, vo);
         return "redirect:/";
     }
@@ -53,12 +62,13 @@ public class MemoController {
     @GetMapping("/{id}")
     public String getById(@Valid @NotNull @PathVariable("id") Integer id, Model model) {
         model.addAttribute("memo", memoService.getById(id));
-        return "detail";
+        return "pages/memos/detail";
     }
 
     @GetMapping
-    public String query(@Valid MemoQueryVO vo, Model model) {
-        model.addAttribute("memos", memoService.query(vo));
-        return "index";
+    public String query(@Valid MemoQueryVO vo, Model model, Pageable pageable) {
+        model.addAttribute("memos", memoService.findAll(vo, pageable));
+        return "pages/memos/index";
     }
+
 }
