@@ -8,7 +8,11 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -68,7 +72,15 @@ public class MemoController {
     @GetMapping
     public String query(@Valid MemoQueryVO vo, Model model, Pageable pageable) {
         model.addAttribute("memos", memoService.findAll(vo, pageable));
+        System.out.println("====================================");
+        System.out.println(Math.floor(6/10)*10+1);
         return "pages/memos/index";
+    }
+
+    @GetMapping("/json")
+    @ResponseBody
+    public ResponseEntity queryJson(MemoQueryVO vo, Pageable pageable) {
+        return ResponseEntity.ok(memoService.findAll(vo, pageable));
     }
 
 }

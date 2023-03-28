@@ -1,12 +1,20 @@
 package com.goosia.memo.entity;
 
-import jakarta.persistence.*;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 /**
  * 메모
  */
 @Table(name = "memo")
+@EnableJpaRepositories
 @Entity
 @Data
 public class Memo {
