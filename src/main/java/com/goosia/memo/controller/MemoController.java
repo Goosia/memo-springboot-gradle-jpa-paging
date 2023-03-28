@@ -71,9 +71,7 @@ public class MemoController {
 
     @GetMapping
     public String query(@Valid MemoQueryVO vo, Model model, Pageable pageable) {
-        model.addAttribute("memos", memoService.findAll(vo, pageable));
-        System.out.println("====================================");
-        System.out.println(Math.floor(6/10)*10+1);
+        model.addAttribute("memos", memoService.findAll(pageable));
         return "pages/memos/index";
     }
 

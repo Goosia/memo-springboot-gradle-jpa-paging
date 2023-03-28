@@ -48,8 +48,9 @@ public class MemoService {
         return memoRepository.findAll(pageable).map(this::toDTO);
     }
 
+    // 페이징 처리된 리스트 조회, 정렬은 idx 의 역순으로.
     public Page<MemoDTO> findAll(Pageable pageable) {
-        return memoRepository.findAll(pageable).map(this::toDTO);
+        return memoRepository.findMemoByOrderByIdxDesc(pageable).map(this::toDTO);
     }
 
     public List<MemoDTO> query(MemoQueryVO vo) {

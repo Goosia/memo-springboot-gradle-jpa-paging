@@ -1,38 +1,69 @@
 spring:
 
+  # 로컬 환경 설정
   profiles:
     active: local
 
+  # application 이름
   application:
     name: MemoApplication
 
+  # httpMethod 에 PUT, DELETE 를 사용하기 위한 설정
   mvc:
     hiddenmethod:
       filter:
         enabled: true
 
+  # db 설정
   datasource:
     username: user_memo
     password: 1234
     url: jdbc:mysql://localhost:3306/db_memo?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Seoul
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  # thymeleaf 설정
   thymeleaf:
     cache: false
 
+  # 막 넣었음 jpa 설정은 다 지워도 동작함
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        default_batch_fetch_size: 100
+        jdbc:
+          batch_size: 100
+          fetch_size: 100
+        order_inserts: true
+        order_updates: true
+        generate_statistics: true
+        use_second_level_cache: true
+        use_query_cache: true
+        sort:
+          default-order: contents
+          default-direction: desc
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: true
+
+  # 페이지네이션 설정
   data:
-    jpa:
-      repositories:
-        enabled: true
     web:
       pageable:
         default-page-size: 10
         one-indexed-parameters: true
 
+  # devtools 설정
   devtools:
     livereload:
       enabled: true
 
+# 로그 설정
 logging:
   level:
-    root: debug
+    root: info
+
